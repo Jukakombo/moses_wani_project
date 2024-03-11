@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: #2C3E50;
+}
+
+ 
+ 
+ .button {
+    background-color: #6D214F;
+ }
+  
+.footer{
+    background-color: #244e6b;
+} 
+.navigation{ 
+    background-color: #16405c;
+} 
+ 
