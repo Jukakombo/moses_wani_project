@@ -41,7 +41,7 @@ const Header = () => {
                 </Link>
               </ul>
             ))}
-            <div className="menu_hamburger md:hidden" onClick={() => setOpen((prev) => !prev)}>
+            <div className="menu_hamburger" onClick={() => setOpen((prev) => !prev)}>
               {open ? <FaRegWindowClose size={30} /> : <IoMenu size={30} />}
             </div>
           </div>
