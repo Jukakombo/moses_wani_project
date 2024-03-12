@@ -1,6 +1,7 @@
 import axios from "axios";
 const API = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://moses-wani-project.onrender.com",
+  // baseURL: "http://localhost:5000",
 });
 
 // const url = "http://localhost:5000/contacts";
