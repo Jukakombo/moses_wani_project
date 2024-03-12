@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
+import QRCode from "qrcode";
+import { useState, useEffect } from "react";
+
 const IDCardWithQRCode = () => {
+  const [qrcode, setQrcode] = useState("");
   const params = useParams();
   const { id } = params;
   const cards = useSelector((state) => state.contacts);
@@ -17,9 +21,31 @@ const IDCardWithQRCode = () => {
     });
     const data = await document.querySelector("#pdf");
     pdf.html(data).then(() => {
-      pdf.save("id_card.pdf");
+      pdf.save(x.studentName);
     });
   };
+
+  const generateQRCode = async () => {
+    try {
+      const qrCodeData = await QRCode.toDataURL(
+        `https://wani-qr-code-generator.netlify.app/${x._id}`,
+        {
+          width: 70,
+          margin: 1,
+          color: {
+            dark: "#000",
+          },
+        }
+      );
+      setQrcode(qrCodeData);
+    } catch (error) {
+      console.error("Error generating QR code:", error);
+    }
+  };
+
+  useEffect(() => {
+    generateQRCode();
+  }, []); // Empty dependency array ensures this effect runs only once after the component mounts
 
   return (
     <div className=" flex justify-center h-screen flex-col items-center ">
@@ -37,12 +63,14 @@ const IDCardWithQRCode = () => {
               </h1>
             </div>
           </div>
-          {/* main conatin */}
-
-          <div className="content bg-gray-200 py-2 ">
+          {/* main content */}
+          <div className="  bg-gray-200 py-2 relative">
             <h1 className="text-blue-800 uppercase font-bold tracking-wider text-2xl mb-2 px-4">
-              Studen Id
+              Student ID
             </h1>
+            <div className="absolute bottom-0 right-1">
+              {qrcode && <img src={qrcode} alt="qrcode" />}
+            </div>
             <div className="">
               <div className="flex ">
                 <img
@@ -54,13 +82,13 @@ const IDCardWithQRCode = () => {
                   <div className="flex gap-2 text-xs">
                     <div className="font-bold">
                       <h1>Student Name </h1>
-                      <h1>School/Center </h1>
-                      <h1>Class/Year </h1>
+                      <h1>School&nbsp;&nbsp;&nbsp;/&nbsp;Center </h1>
+                      <h1>Class&nbsp;&nbsp;&nbsp;/&nbsp;Year </h1>
                       <h1>Index Number </h1>
                       <h1>Nationality </h1>
                       <h1 className="text-green-600">Valid Till </h1>
                     </div>
-                    <div className="font-bold">
+                    <div className="font-bold ">
                       <h1>: {x?.studentName}</h1>
                       <h1>: {x?.schoolCenter}</h1>
                       <h1>: {x?.classYear}</h1>
@@ -76,7 +104,7 @@ const IDCardWithQRCode = () => {
 
           {/* footer */}
           <div className="flex mt-1 items-center justify-between px-4 text-white">
-            <div className="">National Number :{x?.nationalNumber}</div>
+            <div className="">National Number: {x?.nationalNumber}</div>
             <div className="">
               <div className="flex items-center ">
                 <h1 className="mr-4">{"Dean's"} Sign</h1>
@@ -92,12 +120,14 @@ const IDCardWithQRCode = () => {
           </div>
         </div>
       </div>
-      <button
-        onClick={createPDF}
-        className="bg-blue-600 p-2 rounded-md w-[300px] my-2 text-white"
-      >
-        Download Id Card{" "}
-      </button>
+      <div className="flex items-center  my-2">
+        <button
+          onClick={createPDF}
+          className="bg-blue-600 p-2 rounded-md w-[200px] mr-2 text-white"
+        >
+          Download ID Card{" "}
+        </button>
+      </div>
     </div>
   );
 };

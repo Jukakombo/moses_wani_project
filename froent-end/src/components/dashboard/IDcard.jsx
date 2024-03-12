@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import QRCode from "qrcode";
+
 const IDcard = () => {
+  const [qrcodes, setQrcodes] = useState({});
   const cards = useSelector((state) => state.contacts);
 
+  useEffect(() => {
+    const generateQRCode = async (id) => {
+      try {
+        const qrCodeData = await QRCode.toDataURL(
+          `https://wani-qr-code-generator.netlify.app/${id}`,
+          {
+            width: 70,
+            margin: 1,
+            color: {
+              dark: "#000",
+            },
+          }
+        );
+        setQrcodes((prevQrcodes) => ({
+          ...prevQrcodes,
+          [id]: qrCodeData,
+        }));
+      } catch (error) {
+        console.error("Error generating QR code:", error);
+      }
+    };
+
+    cards.forEach((x) => {
+      generateQRCode(x._id);
+    });
+  }, [cards]);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 mb- gap-3 ">
-      <div className="main_container">
+    <div className="">
+      <div className="main_container grid grid-cols-1 md:grid-cols-2 mb-3 gap-3">
         {cards.map((x) => (
           <div
             key={x._id}
@@ -21,12 +51,15 @@ const IDcard = () => {
                 </h1>
               </div>
             </div>
-            {/* main conatin */}
+            {/* main content */}
             <Link to={`/view-id-card-with-qr-code/${x._id}`}>
-              <div className="content bg-gray-200 py-2 ">
+              <div className="content bg-gray-200 py-2 relative ">
                 <h1 className="text-blue-800 uppercase font-bold tracking-wider text-2xl px-4">
-                  Studen Id
+                  Student Id
                 </h1>
+                <div className="absolute bottom-0 right-1">
+                  {qrcodes[x._id] && <img src={qrcodes[x._id]} alt="qrcode" />}
+                </div>
                 <div className="">
                   <div className="flex ">
                     <img
@@ -38,8 +71,8 @@ const IDcard = () => {
                       <div className="flex gap-2 text-xs">
                         <div className="font-bold">
                           <h1>Student Name </h1>
-                          <h1>School/Center </h1>
-                          <h1>Class/Year </h1>
+                          <h1>School / Center </h1>
+                          <h1>Class / Year </h1>
                           <h1>Index Number </h1>
                           <h1>Nationality </h1>
                           <h1 className="text-green-600">Valid Till </h1>

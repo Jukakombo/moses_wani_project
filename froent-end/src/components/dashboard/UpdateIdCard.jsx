@@ -3,7 +3,7 @@ import IDcard from "./IDcard";
 
 const UpdateIdCard = () => {
   return (
-    <div>
+    <div className="">
       <IDcard />
     </div>
   );
