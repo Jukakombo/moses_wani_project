@@ -27,16 +27,13 @@ const IDCardWithQRCode = () => {
 
   const generateQRCode = async () => {
     try {
-      const qrCodeData = await QRCode.toDataURL(
-        `https://wani-qr-code-generator.netlify.app/${x._id}`,
-        {
-          width: 70,
-          margin: 1,
-          color: {
-            dark: "#000",
-          },
-        }
-      );
+      const qrCodeData = await QRCode.toDataURL(`Unique Number: ${x._id}\nIndex Number: ${x.indexNumber}\nName: ${x?.studentName}`, {
+        width: 70,
+        margin: 1,
+        color: {
+          dark: "#000",
+        },
+      });
       setQrcode(qrCodeData);
     } catch (error) {
       console.error("Error generating QR code:", error);
@@ -120,6 +117,7 @@ const IDCardWithQRCode = () => {
           </div>
         </div>
       </div>
+
       <div className="flex items-center  my-2">
         <button
           onClick={createPDF}
