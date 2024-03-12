@@ -1,17 +1,14 @@
 import mongoose from "mongoose";
 const contactSchema = mongoose.Schema(
   {
-    firstName: String,
-    lastName: String,
-    dateOfBirth: String,
-    contact: String,
-    gradeObtain: String,
-    sex: String,
-    courseCompleted: String,
-    startedYear: String,
-    completeYear: String,
+    studentName: String,
+    schoolCenter: String,
+    classYear: String,
+    indexNumber: String,
+    nationality: String,
+    validTill: String,
     profilePhoto: String,
-    customId:String
+    nationalNumber: String,
   },
   { timestamps: true }
 );

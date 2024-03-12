@@ -5,9 +5,6 @@
 body{
     background-color: #2C3E50;
 }
-
- 
- 
  .button {
     background-color: #6D214F;
  }
@@ -21,9 +18,27 @@ body{
 .menu_hamburger{
     display: none;
 }
- 
+/* gradient */
+/* .main_container{
+    position: relative; 
+}
+.over_lay{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: 5s ease-in;
+}
+.main_container:hover.over_lay{
+ height: 100%; 
+ cursor: pointer; 
+} */
+/* media query */
 @media screen and (max-width:767px) {
     .menu_hamburger{
         display: block;
+       
     }
 }

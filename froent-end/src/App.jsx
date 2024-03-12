@@ -30,7 +30,6 @@ const App = () => {
     if (!user) {
       return <Navigate to="/login" />;
     }
-
     return children;
   };
   useEffect(() => {
@@ -53,7 +52,7 @@ const App = () => {
             <Route exact path="/register" element={<Register />} />
             {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
 
-            <Route path="/view-id-card/:id" exact element={<ViewIdCard />} />
+            <Route path="/view-id-card-with-qr-code/:id" exact element={<ViewIdCard />} />
             <Route
               path="/dashboard"
               element={<Dashboard setUser={setUser} user={user} />}

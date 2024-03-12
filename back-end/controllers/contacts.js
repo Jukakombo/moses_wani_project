@@ -26,32 +26,27 @@ export const createContact = async (req, res) => {
 export const updateContact = async (req, res) => {
   const { id } = req.params;
   const {
-    firstName,
-    lastName,
-    dateOfBirth,
-    contact,
-    gradeObtain,
-    sex,
-    courseCompleted,
-    startedYear,
-    completeYear,
-    profilePhoto,
+    studentName,
+    schoolCenter,
+    classYear,
+    indexNumber,
+    nationality,
+    validTill,
+    profilePhoto,nationalNumber
   } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No certificate with such id: ${id} found`);
 
   const updatedContact = {
-    firstName,
-    lastName,
-    dateOfBirth,
-    contact,
-    gradeObtain,
-    sex,
-    courseCompleted,
-    startedYear,
-    completeYear,
+    studentName,
+    schoolCenter,
+    classYear,
+    indexNumber,
+    nationality,
+    validTill,
     profilePhoto,
+    nationalNumber,
     _id: id,
   };
   await Contacts.findByIdAndUpdate(id, updatedContact, { new: true });

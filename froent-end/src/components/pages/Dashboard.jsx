@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { MdOutlineDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { IoIosCreate } from "react-icons/io";
-import { TbFileCertificate } from "react-icons/tb";
 import { FaIdCard } from "react-icons/fa";
 import { IoMailUnread } from "react-icons/io5";
 const Dashboard = ({ user, setUser }) => {
@@ -24,7 +24,7 @@ const Dashboard = ({ user, setUser }) => {
     if (!isAuthenticated) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [user, navigate, setUser]);
   return (
     <>
       {/* <Navigation /> */}

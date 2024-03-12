@@ -32,14 +32,14 @@ app.use("/ngodatas", ngoRouter);
 
 // Default route
 app.get("/", (req, res) => {
-  res.send(
-    "Hello, welcome to my backend api"
-  );
+  res.send("Hello, welcome to my backend api");
 });
 
 // Connect to MongoDB and start the server
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    "mongodb+srv://Best_Programmer:noahduje@cluster0.hpirj.mongodb.net/Juba-University"
+  )
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Your app is running on port http://localhost:${PORT}`);
