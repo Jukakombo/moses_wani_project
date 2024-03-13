@@ -15,6 +15,10 @@ import ContactLists from "./components/dashboard/ContactLists";
 import { useDispatch } from "react-redux";
 import { getContacts } from "./actions/contacts";
 import { getNews } from "./actions/news";
+import TakeAttendance from "./components/dashboard/TakeAttendance";
+import ViewAttendance from "./components/dashboard/ViewAttendance";
+import SMSStudentParents from "./components/dashboard/SMSStudentParents";
+import ModifyAttendance from "./components/dashboard/ModifyAttendance";
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -68,7 +72,18 @@ const App = () => {
               />
 
               <Route path="students" element={<StudentCards />} />
+
+              <Route path="view-attendance" element={<ViewAttendance />} />
+
+              <Route path="take-attendance" element={<TakeAttendance />} />
+
+              <Route
+                path="sms-student-parent"
+                element={<SMSStudentParents />}
+              />
+
               <Route path="contact-list" element={<ContactLists />} />
+              <Route path="modify-attendance" element={<ModifyAttendance />} />
             </Route>
           </Routes>
         </BrowserRouter>
