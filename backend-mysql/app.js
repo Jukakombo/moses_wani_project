@@ -1,71 +1,26 @@
 import express from "express";
 import cors from "cors";
 const app = express();
-import mysql from "mysql";
+import bookRouter from "./routers/books.js";
+import trakingRouter from "./routers/trackings.js";
+import studentsRouter from "./routers/studentsRegistere.js";
+import courseRouter from "./routers/courseRegister.js";
+import userRouter from "./routers/users.js";
+import settingRouter from "./routers/settings.js";
 app.use(express.json());
 app.use(cors());
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "admin",
-  database: "test",
-});
+
 app.get("/", (req, res) => {
-  res.json("Hello World!");
+  res.json("DB connected successfully via mysql");
 });
-app.get("/books", (req, res) => {
-  const q = "SELECT * FROM books";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    res.json(data);
-  });
-});
-// create a book
+// get all books
+app.use("/books", bookRouter);
+app.use("/trackings", trakingRouter);
+app.use("/students", studentsRouter);
+app.use("/courses", courseRouter);
+app.use("/users", userRouter);
+app.use("/settings", settingRouter);
 
-app.post("/books", (req, res) => {
-  const q = "INSERT INTO books (`title`,`desc`,`price`,`cover`) VALUES (?)";
-  const values = [
-    req.body.title,
-    req.body.desc,
-    req.body.price,
-    req.body.cover,
-  ];
-  db.query(q, [values], (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
-// delete book
-app.delete("/books/:id", (req, res) => {
-  const bookId = req.params.id;
-
-  const q = "DELETE FROM books WHERE id =?";
-
-  db.query(q, [bookId], (err, data) => {
-    if (err) return res.json(err);
-    return res.json("Book has been successfully deleted");
-  });
-});
-// update book
-
-app.put("/books/:id", (req, res) => {
-  const bookId = req.params.id;
-
-  const q =
-    "UPDATE books SET `title` =?, `desc` =?, `price` =?, `cover` =? WHERE id =?";
-
-  const values = [
-    req.body.title,
-    req.body.desc,
-    req.body.price,
-    req.body.cover,
-  ];
-
-  db.query(q, [...values, bookId], (err, data) => {
-    if (err) return res.json(err);
-    return res.json("Book has been successfully updated");
-  });
-});
 app.listen(5000, () => {
   console.log("conntected 🚀 to backed http://localhost:5000");
 });
