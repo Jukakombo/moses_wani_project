@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Index from "./components/pages/Index";
@@ -19,6 +20,8 @@ import TakeAttendance from "./components/dashboard/TakeAttendance";
 import ViewAttendance from "./components/dashboard/ViewAttendance";
 import SMSStudentParents from "./components/dashboard/SMSStudentParents";
 import ModifyAttendance from "./components/dashboard/ModifyAttendance";
+import CreateStudents from "./components/dashboard/CreateStudents";
+import Tracking from "./components/dashboard/Tracking";
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -76,6 +79,8 @@ const App = () => {
               <Route path="view-attendance" element={<ViewAttendance />} />
 
               <Route path="take-attendance" element={<TakeAttendance />} />
+              <Route path="create-new-student" element={<CreateStudents />} />
+              <Route path="creact-tracking" element={<Tracking />} />
 
               <Route
                 path="sms-student-parent"

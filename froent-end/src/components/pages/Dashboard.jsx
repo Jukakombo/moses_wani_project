@@ -11,6 +11,9 @@ import { FaIdCard, FaList, FaUserGraduate } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { AiOutlineLogin } from "react-icons/ai";
 import { IoMailUnread } from "react-icons/io5";
+import { PiStudentBold } from "react-icons/pi";
+import { SiObservable } from "react-icons/si";
+
 const Dashboard = ({ user, setUser }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -100,6 +103,25 @@ const Dashboard = ({ user, setUser }) => {
                 </div>
               </div>
             </Link>
+            {/* Create Student */}
+            <Link to="create-new-student">
+              <div className="functions">
+                <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
+                  <PiStudentBold size={30} />
+                  <p className="ml-4">Register New Student</p>{" "}
+                </div>
+              </div>
+            </Link>
+            {/* Create tracking */}
+            <Link to="creact-tracking">
+              <div className="functions">
+                <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
+                  <SiObservable size={30} />
+                  <p className="ml-4">Track Student</p>{" "}
+                </div>
+              </div>
+            </Link>
+
             {/* sms students / parents */}
             <Link to="sms-student-parent">
               <div className="functions">

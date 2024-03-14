@@ -21,6 +21,6 @@ app.use("/courses", courseRouter);
 app.use("/users", userRouter);
 app.use("/settings", settingRouter);
 
-app.listen(5000, () => {
-  console.log("conntected 🚀 to backed http://localhost:5000");
+app.listen(9000, () => {
+  console.log("conntected 🚀 to backed http://localhost:9000");
 });
