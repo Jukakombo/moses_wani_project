@@ -9,10 +9,13 @@ import { useDispatch } from "react-redux";
 import { IoIosCreate } from "react-icons/io";
 import { FaIdCard, FaList, FaUserGraduate } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
-import { AiOutlineLogin } from "react-icons/ai";
+import { FaUserFriends } from "react-icons/fa";
+
 import { IoMailUnread } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { SiObservable } from "react-icons/si";
+import { SiBookstack } from "react-icons/si";
+import { IoSettingsSharp } from "react-icons/io5";
 
 const Dashboard = ({ user, setUser }) => {
   const navigate = useNavigate();
@@ -52,14 +55,6 @@ const Dashboard = ({ user, setUser }) => {
         </div>
         <div className="flex  justify-between   w-11/12 m-auto py-8 ">
           <div className="bg-[#16405c] border-2 border-white flex-[30%] flex-col justify-between p-4">
-            {/* login as a prof */}
-            <Link to="students">
-              <div className="p-2 admin_hover bg-[#2d2b42] m-4 text-white rounded cursor-pointer flex items-center">
-                <AiOutlineLogin size={30} />
-
-                <p className="ml-4"> Login as aLecturer</p>
-              </div>
-            </Link>
             <Link to="students">
               <div className="p-2 admin_hover bg-[#2d2b42] m-4 text-white rounded cursor-pointer flex items-center">
                 <FaIdCard className="text-white" size={30} />
@@ -112,6 +107,15 @@ const Dashboard = ({ user, setUser }) => {
                 </div>
               </div>
             </Link>
+            {/* Create Student */}
+            <Link to="register-in-course">
+              <div className="functions">
+                <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
+                  <SiBookstack size={30} />
+                  <p className="ml-4">Register In Course</p>{" "}
+                </div>
+              </div>
+            </Link>
             {/* Create tracking */}
             <Link to="creact-tracking">
               <div className="functions">
@@ -140,7 +144,20 @@ const Dashboard = ({ user, setUser }) => {
                 </div>
               </div>
             </Link>
-
+            {/* Settings */}
+            <Link to="students">
+              <div className="p-2 admin_hover bg-[#2d2b42] m-4 text-white rounded cursor-pointer flex items-center">
+                <IoSettingsSharp size={30} />
+                <p className="ml-4"> Settings</p>
+              </div>
+            </Link>
+            <Link to="users">
+              <div className="p-2 admin_hover bg-[#2d2b42] m-4 text-white rounded cursor-pointer flex items-center">
+                {/* <IoSettingsSharp size={30} /> */}
+                <FaUserFriends size={30} />
+                <p className="ml-4"> Users</p>
+              </div>
+            </Link>
             {/*logout  */}
             <div
               className="text-white functions cursor-pointer  items-center rounded-md admin_btn p-2 mx-4 hover:bg-blue-600 flex items-center bg-[#2d2b42]"

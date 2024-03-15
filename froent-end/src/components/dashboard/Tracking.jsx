@@ -40,7 +40,7 @@ const Tracking = () => {
   return (
     <div>
       <div className="bg-[#F5F5F5] rounded-md p-2">
-        <div className="flex flex-col my-2">
+        <div className=" grid grid-cols-2 gap-8 my-2">
           <div className="flex flex-col">
             <label className="font-bold">Course Code</label>
             <input
@@ -48,7 +48,7 @@ const Tracking = () => {
               name="CourseCode"
               placeholder="Course Code"
               onChange={handleChange}
-              className="p-3 rounded-md mt-2 outline-blue-600"
+              className="p-3 rounded-md  outline-blue-600"
               required
             />
           </div>
@@ -59,7 +59,7 @@ const Tracking = () => {
               name="Issue"
               placeholder="Issue  "
               onChange={handleChange}
-              className="p-3 rounded-md mt-2 outline-blue-600"
+              className="p-3 rounded-md  outline-blue-600"
               required
             />{" "}
           </div>
@@ -70,7 +70,7 @@ const Tracking = () => {
               name="Description"
               placeholder="Description  "
               onChange={handleChange}
-              className="p-3 rounded-md mt-2 outline-blue-600"
+              className="p-3 rounded-md  outline-blue-600"
               required
             />
           </div>
@@ -81,17 +81,17 @@ const Tracking = () => {
               name="Status"
               placeholder="Status"
               onChange={handleChange}
-              className="p-3 rounded-md mt-2 outline-blue-600"
+              className="p-3 rounded-md  outline-blue-600"
               required
             />
           </div>
-          <button
-            className="bg-blue-600 p-2  my-4 text-white rounded-md"
-            onClick={handleClick}
-          >
-            Sumit
-          </button>
         </div>
+        <button
+          className="bg-blue-600 p-2 w-full  my-4 text-white rounded-md"
+          onClick={handleClick}
+        >
+          Sumit
+        </button>
         <TrackingTable trackings={trackings} />
       </div>
     </div>

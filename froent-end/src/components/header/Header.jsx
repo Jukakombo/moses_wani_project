@@ -23,6 +23,11 @@ const links = [
     name: "Admin",
     path: "/login",
   },
+  {
+    _id: "jkhDJDJDJDdddddjdj",
+    name: "prof-portal",
+    path: "/prof-portal",
+  },
 ];
 const Header = () => {
   const [open, setOpen] = useState(false);

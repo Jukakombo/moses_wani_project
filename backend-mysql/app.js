@@ -7,6 +7,7 @@ import studentsRouter from "./routers/studentsRegistere.js";
 import courseRouter from "./routers/courseRegister.js";
 import userRouter from "./routers/users.js";
 import settingRouter from "./routers/settings.js";
+import attendanceRouter from "./routers/attendances.js";
 app.use(express.json());
 app.use(cors());
 
@@ -20,7 +21,8 @@ app.use("/students", studentsRouter);
 app.use("/courses", courseRouter);
 app.use("/users", userRouter);
 app.use("/settings", settingRouter);
+app.use("/attendances", attendanceRouter);
 
 app.listen(9000, () => {
-  console.log("conntected 🚀 to backed http://localhost:9000");
+  console.log("conntected 🚀 to database http://localhost:9000");
 });

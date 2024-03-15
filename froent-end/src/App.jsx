@@ -22,6 +22,10 @@ import SMSStudentParents from "./components/dashboard/SMSStudentParents";
 import ModifyAttendance from "./components/dashboard/ModifyAttendance";
 import CreateStudents from "./components/dashboard/CreateStudents";
 import Tracking from "./components/dashboard/Tracking";
+import CourseRegister from "./components/dashboard/CourseRegister";
+import Professor from "./components/pages/Professor";
+import Users from "./components/dashboard/Users";
+import LecturerAdmin from "./components/pages/LecturerAdmin";
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -57,6 +61,7 @@ const App = () => {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
+            <Route exact path="/prof-portal" element={<Professor />} />
             {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
 
             <Route
@@ -64,6 +69,14 @@ const App = () => {
               path="/view-id-card-with-qr-code/:id"
               element={<ViewIdCard />}
             />
+            <Route
+              exact
+              path="/lecturer-admin"
+              element={<LecturerAdmin />}
+            >
+              <Route path="view-attendance" element={<ViewAttendance />} />
+              <Route path="take-attendance" element={<TakeAttendance />} />
+            </Route>
             <Route
               path="/dashboard"
               element={<Dashboard setUser={setUser} user={user} />}
@@ -79,14 +92,14 @@ const App = () => {
               <Route path="view-attendance" element={<ViewAttendance />} />
 
               <Route path="take-attendance" element={<TakeAttendance />} />
+              <Route path="register-in-course" element={<CourseRegister />} />
               <Route path="create-new-student" element={<CreateStudents />} />
               <Route path="creact-tracking" element={<Tracking />} />
-
+              <Route path="users" element={<Users />} />
               <Route
                 path="sms-student-parent"
                 element={<SMSStudentParents />}
               />
-
               <Route path="contact-list" element={<ContactLists />} />
               <Route path="modify-attendance" element={<ModifyAttendance />} />
             </Route>

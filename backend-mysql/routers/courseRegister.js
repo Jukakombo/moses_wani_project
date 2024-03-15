@@ -6,7 +6,6 @@ import {
   getCourseRegister,
   updateCourse,
 } from "../tables/courseRegistered.js";
-
 const courseRouter = express.Router();
 courseRouter.get("/", getCourseRegister);
 courseRouter.post("/", createCourse);

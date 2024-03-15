@@ -33,8 +33,8 @@ export const createCourse = async (req, res) => {
       req.body.Course2,
       req.body.Course3,
       req.body.Course4,
-      req.body.Course15,
-      req.body.Course16,
+      req.body.Course5,
+      req.body.Course6,
       req.body.Course7,
       req.body.Course8,
       req.body.Course9,
@@ -63,8 +63,8 @@ export const updateCourse = async (req, res) => {
       req.body.Course2,
       req.body.Course3,
       req.body.Course4,
-      req.body.Course15,
-      req.body.Course16,
+      req.body.Course5,
+      req.body.Course6,
       req.body.Course7,
       req.body.Course8,
       req.body.Course9,
@@ -72,7 +72,7 @@ export const updateCourse = async (req, res) => {
     ];
     db.query(q, [...values, courseId], (err, data) => {
       if (err) return res.json(err);
-      return res.json("Book has been successfully updated");
+      return res.json("Course has been successfully updated");
     });
   } catch (error) {
     res.json(error);
