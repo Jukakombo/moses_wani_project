@@ -8,6 +8,8 @@ import courseRouter from "./routers/courseRegister.js";
 import userRouter from "./routers/users.js";
 import settingRouter from "./routers/settings.js";
 import attendanceRouter from "./routers/attendances.js";
+import lecturerLoginRouter from "./routers/lecturerLogin.js";
+import lecturerSignUp from "./routers/LecturerSignUp.js";
 app.use(express.json());
 app.use(cors());
 
@@ -22,6 +24,8 @@ app.use("/courses", courseRouter);
 app.use("/users", userRouter);
 app.use("/settings", settingRouter);
 app.use("/attendances", attendanceRouter);
+app.use("/login", lecturerLoginRouter);
+app.use("/signup", lecturerSignUp);
 
 app.listen(9000, () => {
   console.log("conntected 🚀 to database http://localhost:9000");

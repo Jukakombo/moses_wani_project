@@ -26,6 +26,8 @@ import CourseRegister from "./components/dashboard/CourseRegister";
 import Professor from "./components/pages/Professor";
 import Users from "./components/dashboard/Users";
 import LecturerAdmin from "./components/pages/LecturerAdmin";
+import LecturerRegister from "./components/LecturersAdmin/LecturerRegister";
+import LecturerLogin from "./components/LecturersAdmin/LecturerLogin";
 const App = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -61,9 +63,8 @@ const App = () => {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/prof-portal" element={<Professor />} />
-            {/* <Route exact path="/dashboard" element={<Dashboard />} /> */}
-
+            <Route exact path="/prof-portal" element={<LecturerRegister />} />
+            <Route exact path="/prof-login-portal" element={<LecturerLogin />} />  
             <Route
               exact
               path="/view-id-card-with-qr-code/:id"
