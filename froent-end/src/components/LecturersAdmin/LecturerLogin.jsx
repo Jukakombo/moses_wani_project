@@ -11,7 +11,9 @@ const LecturerLogin = () => {
     email: "",
     password: "",
   });
-
+  // handling json token
+  axios.defaults.withCredentials = true;
+  // handling login form
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = loginValidation(values);
@@ -21,10 +23,10 @@ const LecturerLogin = () => {
       axios
         .post("http://localhost:9000/login", values)
         .then((res) => {
-          if (res.data === "success") {
+          if (res.data.Status === "success") {
             navigate("/lecturer-admin");
           } else {
-            alert("No records existed");
+            alert(res.data.Message);
           }
         })
         .catch((error) => {

@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 const app = express();
 import bookRouter from "./routers/books.js";
 import trakingRouter from "./routers/trackings.js";
@@ -10,12 +12,30 @@ import settingRouter from "./routers/settings.js";
 import attendanceRouter from "./routers/attendances.js";
 import lecturerLoginRouter from "./routers/lecturerLogin.js";
 import lecturerSignUp from "./routers/LecturerSignUp.js";
-app.use(express.json());
-app.use(cors());
+import mysql from "mysql";
+import getUserRouter from "./routers/getUser.js";
 
-app.get("/", (req, res) => {
-  res.json("DB connected successfully via mysql");
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+//connecting to db
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "admin",
+  database: "test",
 });
+app.get("/home", (req, res) => {
+  res.json("Connected successfully to mysql DB");
+});
+
+app.use("/", getUserRouter);
 // get all books
 app.use("/books", bookRouter);
 app.use("/trackings", trakingRouter);

@@ -96,7 +96,7 @@ const LecturerRegister = () => {
           <div className="flex items-center ">
             <p>{"Don't"} have an account?</p>
             <Link className="text-blue-600 ml-2" to="/prof-login-portal">
-              Create a new account
+            Login
             </Link>
           </div>
         </form>

@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import moment from "moment";
 const AttendanceTable = ({ attendances }) => {
   const [query, setQuery] = useState("");
 
   // Filter students based on the query
-  const filteredStudents = attendances.filter((student) =>
+  const filteredStudents = attendances?.filter((student) =>
     student.studentName.toLowerCase().includes(query.toLowerCase())
   );
 

@@ -1,38 +1,68 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+
 import { MdAdminPanelSettings } from "react-icons/md";
 import { BiMaleFemale } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
-import { TbCircleArrowDownRight, TbLogout } from "react-icons/tb";
-import { MdEdit, MdOutlineDelete } from "react-icons/md";
-import { IoIosCreate } from "react-icons/io";
-import { FaIdCard, FaList, FaUserGraduate } from "react-icons/fa";
+import { TbLogout } from "react-icons/tb";
+import { MdEdit } from "react-icons/md";
+import { FaList, FaUserGraduate } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
-import { FaUserFriends } from "react-icons/fa";
-
-import { IoMailUnread } from "react-icons/io5";
-import { PiStudentBold } from "react-icons/pi";
-import { SiObservable } from "react-icons/si";
-import { SiBookstack } from "react-icons/si";
-import { IoSettingsSharp } from "react-icons/io5";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 const LecturerAdmin = () => {
+  const [auth, setAuth] = useState(false);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    axios.get("http://localhost:9000").then((res) => {
+      if (res.data.Status === "success") {
+        setAuth(true);
+        setName(res.data.name);
+      } else {
+        setAuth(false);
+        setMessage(res.data.Message);
+      }
+    });
+  }, []);
+  // logout
+  const handleLogout = () => {
+    axios
+      .get("http://localhost:9000/logout")
+      .then((res) => {
+        location.reload(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
-      {" "}
-      {/* <Navigation /> */}
+      {auth ? (
+        <div>
+          <h1>You are authorized {name}</h1>
+          <button>Logout</button>
+        </div>
+      ) : (
+        <div>
+          <h1>{message}</h1>
+          <button>Login</button>
+        </div>
+      )}
       <div className="bg-[#2C3E50] py-24 h-full flex flex-col justify-between">
         <div className="flex justify-between w-11/12 m-auto items-between text-white">
           <h1 className="font-bold text-2xl">
-            Hi <span className="text-[#fd4fb8]">{"Hello professon: Ali"}</span>,
-            QR-Code Generator!
+            Welcome {" professor "}
+            <span className="text-[#fd4fb8]">{name}</span> Glad to see you
+            continue with your nice work
           </h1>
           <div
             className="flex items-center rounded-md admin_btn p-2 bg-[#2d2b42] hover:bg-blue-600"
             onClick={() => {}}
           >
             <TbLogout className="cursor-pointer" size={30} />
-            <button className=" text-white rounded">Logout</button>
+            <button  className=" text-white rounded">
+              <Link to={"/prof-login-portal"}>Logout</Link>
+            </button>
             &nbsp;
           </div>
         </div>
@@ -61,7 +91,7 @@ const LecturerAdmin = () => {
             {/*logout  */}
             <div
               className="text-white functions cursor-pointer    rounded-md admin_btn p-2 mx-4 hover:bg-blue-600 flex items-center bg-[#2d2b42]"
-              onClick={() => {}}
+              // onClick={() => {}}
             >
               &nbsp;
               <TbLogout className="mr-4" size={30} />
