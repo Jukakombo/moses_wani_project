@@ -34,7 +34,10 @@ const db = mysql.createConnection({
 app.get("/home", (req, res) => {
   res.json("Connected successfully to mysql DB");
 });
-
+app.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  return res.json({ Status: "success" });
+});
 app.use("/", getUserRouter);
 // get all books
 app.use("/books", bookRouter);

@@ -23,13 +23,23 @@ const TakeAttendance = () => {
       console.log(error);
     }
     setSuccess(true);
+    clearAttendanceForm();
     setTimeout(() => {
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
     }, 2000);
   };
-
+  const clearAttendanceForm = () => {
+    setAttendance({
+      studentName: "",
+      rollNumber: "",
+      status: "",
+      timestamps: "",
+      professorName: "",
+      subject: "",
+    });
+  };
   return (
     <div>
       <div className="bg-[#F5F5F5] rounded-md p-2">
@@ -41,6 +51,7 @@ const TakeAttendance = () => {
               name="studentName"
               placeholder="Student Name"
               onChange={handleChange}
+              value={attendance.studentName}
               className="p-3 rounded-md  outline-blue-600"
               required
             />
@@ -54,6 +65,7 @@ const TakeAttendance = () => {
               onChange={handleChange}
               className="p-3 rounded-md  outline-blue-600"
               required
+              value={attendance.rollNumber}
             />{" "}
           </div>
           <div className="flex flex-col">
@@ -65,6 +77,7 @@ const TakeAttendance = () => {
               onChange={handleChange}
               className="p-3 rounded-md  outline-blue-600"
               required
+              value={attendance.status}
             />
           </div>
           <div className="flex flex-col">
@@ -76,6 +89,7 @@ const TakeAttendance = () => {
               onChange={handleChange}
               className="p-3 rounded-md  outline-blue-600"
               required
+              value={attendance.timestamps}
             />
           </div>
           <div className="flex flex-col">
@@ -87,6 +101,7 @@ const TakeAttendance = () => {
               onChange={handleChange}
               className="p-3 rounded-md  outline-blue-600"
               required
+              value={attendance.professorName}
             />
           </div>
           <div className="flex flex-col">
@@ -98,6 +113,7 @@ const TakeAttendance = () => {
               onChange={handleChange}
               className="p-3 rounded-md  outline-blue-600"
               required
+              value={attendance.subject}
             />
           </div>
         </div>
