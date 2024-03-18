@@ -5,6 +5,7 @@ import Header from "../header/Header";
 
 import { registerValidation } from "./registerValidation";
 import axios from "axios";
+import Processing from "../Processing";
 
 function Register() {
   const navigate = useNavigate();
@@ -234,6 +235,9 @@ function Register() {
                   Login
                 </Link>
               </p>
+              <div className="">
+                <Processing />
+              </div>
               <div className="">
                 <button
                   type="submit"
