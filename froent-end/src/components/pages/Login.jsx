@@ -2,28 +2,47 @@ import { useState } from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { signin } from "../../actions/user";
-
-const initialState = {
-  email: "",
-  password: "",
-};
+import axios from "axios";
+import { loginValidation } from "./loginValidation";
 
 function Login() {
-  const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [errors, setErrors] = useState({});
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  // handling json token
+  axios.defaults.withCredentials = true;
+  // handling login form
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signin(formData, navigate));
+    const validationErrors = loginValidation(values);
+    setErrors(validationErrors);
+    // Check if there are no validation errors
+    if (validationErrors.email === "" && validationErrors.password === "") {
+      axios
+        .post("http://localhost:9000/login-user", values)
+        .then((res) => {
+          if (res.data.Status === "success") {
+            navigate("/admin-dashboard");
+          } else {
+            alert(res.data.Message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error occurred during login request:", error);
+        });
+    }
+  };
+
+  const handleChange = (e) => {
+    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
     <>
       <Header />
-
       <div className="w-10/12 m-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
           <div className="">
@@ -52,15 +71,9 @@ function Login() {
                 type="text"
                 placeholder="Email"
                 name="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    email: e.target.value,
-                  })
-                }
-                required
+                onChange={handleChange}
               />
+              <span className="text-red-600">{errors.email}</span>
             </div>
             <div className="mb-4">
               <label
@@ -75,15 +88,9 @@ function Login() {
                 type="password"
                 placeholder="Password"
                 name="password"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    password: e.target.value,
-                  })
-                }
-                required
+                onChange={handleChange}
               />
+              <span className="text-red-600">{errors.password}</span>
             </div>
             <div className="mb-4">
               <button
@@ -93,7 +100,7 @@ function Login() {
                 Login
               </button>
               <p className="text-white py-4 text-xl">
-                {"Don't"} have an account?
+                {"Don't"} have an account?{" "}
                 <Link to="/register" className="text-blue-600">
                   Register
                 </Link>

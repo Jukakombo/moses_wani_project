@@ -48,7 +48,9 @@ const ErrorLogin = () => {
           onSubmit={handleSubmit}
           className="bg-gray-300 py-4 px-4 rounded-md "
         >
-          <span className="text-red-600">Error You are not authorized please login again</span>
+          <span className="text-red-600">
+            Error You are not authorized please login or create new account
+          </span>
           <div className="flex flex-col border p-2 rounded">
             <label htmlFor="email" className="mb-2 font-bold">
               Email

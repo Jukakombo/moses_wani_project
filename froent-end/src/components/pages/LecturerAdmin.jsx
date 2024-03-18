@@ -9,11 +9,11 @@ import { FaList, FaUserGraduate } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ErrorLogin from "../LecturersAdmin/ErrorLogin";
 const LecturerAdmin = () => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios.get("http://localhost:9000").then((res) => {
@@ -56,8 +56,8 @@ const LecturerAdmin = () => {
               onClick={handleLogout}
             >
               <TbLogout className="cursor-pointer" size={30} />
-              <button className=" text-white rounded">
-                <Link to={handleLogout}>Logout</Link>
+              <button onClick={handleLogout} className=" text-white rounded">
+                <span>Logout</span>
               </button>
               &nbsp;
             </div>
@@ -86,6 +86,7 @@ const LecturerAdmin = () => {
 
               {/*logout  */}
               <div
+                onClick={handleLogout}
                 className="text-white functions cursor-pointer    rounded-md admin_btn p-2 mx-4 hover:bg-blue-600 flex items-center bg-[#2d2b42]"
                 // onClick={() => {}}
               >
@@ -132,7 +133,21 @@ const LecturerAdmin = () => {
         </div>
       ) : (
         <div>
-          <ErrorLogin />
+          <div className="flex justify-center h-screen">
+            <div className="flex bg-white  rounded-md flex-col w-[500px] m-auto border p-2">
+              <div className="">
+                <p className="italic py-4 text-red-600 text-xl text-center">
+                  {message}{" "}
+                </p>
+              </div>
+              <Link
+                to="/login"
+                className="text-white font-bold bg-blue-600 p-2 rounded-md w-full text-center hover:bg-blue-800"
+              >
+                Login
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </div>

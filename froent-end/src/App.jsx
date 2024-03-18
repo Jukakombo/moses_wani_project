@@ -64,34 +64,28 @@ const App = () => {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/prof-portal" element={<LecturerRegister />} />
-            <Route exact path="/prof-login-portal" element={<LecturerLogin />} />  
+            <Route
+              exact
+              path="/prof-login-portal"
+              element={<LecturerLogin />}
+            />
             <Route
               exact
               path="/view-id-card-with-qr-code/:id"
               element={<ViewIdCard />}
             />
-            <Route
-              exact
-              path="/lecturer-admin"
-              element={<LecturerAdmin />}
-            >
+            <Route exact path="/lecturer-admin" element={<LecturerAdmin />}>
               <Route path="view-attendance" element={<ViewAttendance />} />
               <Route path="take-attendance" element={<TakeAttendance />} />
             </Route>
-            <Route
-              path="/dashboard"
-              element={<Dashboard setUser={setUser} user={user} />}
-            >
+            <Route path="/admin-dashboard" element={<Dashboard />}>
               <Route path="create-student" element={<CreateStudent />} />
               <Route
                 path="delete-student-id-card"
                 element={<DeleteStudent />}
               />
-
               <Route path="students" element={<StudentCards />} />
-
               <Route path="view-attendance" element={<ViewAttendance />} />
-
               <Route path="take-attendance" element={<TakeAttendance />} />
               <Route path="register-in-course" element={<CourseRegister />} />
               <Route path="create-new-student" element={<CreateStudents />} />

@@ -1,5 +1,5 @@
 import express from "express";
-import { loginProf } from "../tables/lecturerLogin.js";
+import { loginProf, verifyUser } from "../tables/lecturerLogin.js";
 
 const lecturerLoginRouter = express.Router();
 

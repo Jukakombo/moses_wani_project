@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 const app = express();
 import bookRouter from "./routers/books.js";
@@ -14,6 +13,7 @@ import lecturerLoginRouter from "./routers/lecturerLogin.js";
 import lecturerSignUp from "./routers/LecturerSignUp.js";
 import mysql from "mysql";
 import getUserRouter from "./routers/getUser.js";
+import loginUser from "./routers/loginUser.js";
 
 app.use(express.json());
 app.use(cookieParser());
@@ -39,7 +39,6 @@ app.get("/logout", (req, res) => {
   return res.json({ Status: "success" });
 });
 app.use("/", getUserRouter);
-// get all books
 app.use("/books", bookRouter);
 app.use("/trackings", trakingRouter);
 app.use("/students", studentsRouter);
@@ -49,6 +48,7 @@ app.use("/settings", settingRouter);
 app.use("/attendances", attendanceRouter);
 app.use("/login", lecturerLoginRouter);
 app.use("/signup", lecturerSignUp);
+app.use("/login-user", loginUser);
 
 app.listen(9000, () => {
   console.log("conntected 🚀 to database http://localhost:9000");

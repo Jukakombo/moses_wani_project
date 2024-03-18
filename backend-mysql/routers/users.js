@@ -3,8 +3,8 @@ import express from "express";
 import {
   createUser,
   deleteUser,
-  getUsers,
-  updateUser,
+  getUsers, 
+  updateUser, 
 } from "../tables/users.js";
 
 const userRouter = express.Router();

@@ -1,4 +1,5 @@
 import mysql from "mysql";
+import multer from "multer";
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -20,11 +21,24 @@ export const getstudents = async (req, res) => {
     res.json(error);
   }
 };
-//   create tracking
+
+// handling image upload with mysql express
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, "./public/images");
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+
+export const upload = multer({ storage });
+
+//   create student
 export const createStudent = async (req, res) => {
   try {
     const q =
-      "INSERT INTO studentsRegistered (`RegNumber`,`Title`,`FirstName`,`LastName`,`OtherName`,`DateOfBirth`,`Gender`,`MaritalStatus`,`Nationality`,`StateOfOrigin`,`LGA`,`TownOfOrigin`,`Address`,`Email`,`Mobile`,`GuardianName`,`GuardianNumber`,`GuardianAddress`,`Faculty`,`Department`,`Level`,`Onleave`,`Onsuspension`,`Expelled`,`Hostel`,`OffCampus`,`MentorName`,`MentorNumber`,`MentorDepartment`,`Passport`,`Total`) VALUES (?)";
+      "INSERT INTO studentsRegistered (`RegNumber`,`Title`,`FirstName`,`LastName`,`OtherName`,`DateOfBirth`,`Gender`,`MaritalStatus`,`Nationality`,`StateOfOrigin`,`LGA`,`TownOfOrigin`,`Address`,`Email`,`Mobile`,`GuardianName`,`GuardianNumber`,`GuardianAddress`,`Faculty`,`Department`,`Level`,`Onleave`,`Onsuspension`,`Expelled`,`Hostel`,`OffCampus`,`MentorName`,`MentorNumber`,`MentorDepartment`,`Passport`,`Total`,`profilePicture`) VALUES (?)";
     const values = [
       req.body.RegNumber,
       req.body.Title,
@@ -57,6 +71,7 @@ export const createStudent = async (req, res) => {
       req.body.MentorDepartment,
       req.body.Passport,
       req.body.Total,
+      req.file.filename,
     ];
     db.query(q, [values], (err, data) => {
       if (err) return res.json(err);

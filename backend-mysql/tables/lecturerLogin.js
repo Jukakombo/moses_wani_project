@@ -26,7 +26,8 @@ export const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.json({
-      Message: "We need token please provide it . Login now",
+      Message:
+        "Access to Professor dashboard requires valid credentials.Please provide your email and password for authentication",
     });
   } else {
     jwt.verify(token, "Our-jsonwebtoken-secret-key", (err, decoded) => {
@@ -41,12 +42,6 @@ export const verifyUser = (req, res, next) => {
     });
   }
 };
-// app.get("/", verifyUser, (req, res) => {
-//   return res.json({
-//     Status: "success",
-//     name: req.name,
-//   });
-// });
 
 export const loginProf = async (req, res) => {
   try {
