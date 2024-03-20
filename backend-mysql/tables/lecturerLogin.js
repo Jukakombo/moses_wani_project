@@ -7,6 +7,21 @@ const db = mysql.createConnection({
   database: "test",
 });
 
+// get all the lecturers
+export const getAllLecturers = async (req, res) => {
+  try {
+    const q = "SELECT * FROM signup";
+    db.query(q, (error, data) => {
+      if (error) {
+        return res.json(error);
+      }
+      res.json(data);
+    });
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 //  sign up
 export const createSignUp = async (req, res) => {
   try {

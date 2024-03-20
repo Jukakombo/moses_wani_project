@@ -47,7 +47,7 @@ export const updateAttendance = async (req, res) => {
   try {
     const bookId = req.params.id;
     const q =
-      "UPDATE attendances SET `studentName` =?, `rollNumber` =?, `status` =?, `timestamps`,`professorName`,`subject` =? WHERE id =?";
+      "UPDATE attendances SET `studentName` = ?, `rollNumber` = ?, `status` = ?, `timestamps` = ?, `professorName` = ?, `subject` = ? WHERE id = ?";
     const values = [
       req.body.studentName,
       req.body.rollNumber,
@@ -64,6 +64,7 @@ export const updateAttendance = async (req, res) => {
     res.json(error);
   }
 };
+
 //   delete book
 export const deleteAttendance = async (req, res) => {
   try {

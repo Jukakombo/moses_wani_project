@@ -13,6 +13,47 @@ const LecturerAdmin = () => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  // grtting the numbers
+  const [users, setUsers] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [lecturer, setLecturer] = useState([]);
+
+  // numbers of admin
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:9000/users");
+        setUsers(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllUsers();
+  }, []);
+  // numners of students
+  useEffect(() => {
+    const fetchingAllTheStudents = async () => {
+      try {
+        const res = await axios.get("http://localhost:9000/students");
+        setStudents(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchingAllTheStudents();
+  }, []);
+  // numbers lecturere
+  useEffect(() => {
+    const fetchingAllTheStudents = async () => {
+      try {
+        const res = await axios.get("http://localhost:9000/signup");
+        setLecturer(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchingAllTheStudents();
+  }, []);
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -26,6 +67,7 @@ const LecturerAdmin = () => {
       }
     });
   }, []);
+
   // logout
   const handleLogout = () => {
     axios
@@ -97,34 +139,34 @@ const LecturerAdmin = () => {
             </div>
 
             <div className="main_bar px-4  flex-[70%] bg-white py-4">
-              <div className="grid grid-cols-4 gap-8 bg-[#2d2b42] rounded-lg text-white p-2 mb-4">
-                <div className="flex flex-col items-center cursor-pointer">
+              <div className="grid grid-cols-3 gap-8 bg-[#2d2b42] rounded-lg text-white p-2 mb-4">
+                {/* <div className="flex flex-col items-center cursor-pointer">
                   <div className="">
                     <BiMaleFemale size={30} />
                   </div>
                   <h1 className="font-bold">Female Students</h1>
                   <h1>12</h1>
-                </div>
-                <div className="cursor-pointer flex flex-col items-center">
+                </div> */}
+                <div className="cursor-pointer flex flex-col items-center bg-[#16405c] border py-4">
                   <div className="">
                     <FaUserGraduate size={30} />
                   </div>
-                  <h1 className="font-bold">Male Students</h1>
-                  <h1>12</h1>
+                  <h1 className="font-bold">Students</h1>
+                  <h1>{students?.length}</h1>
                 </div>
-                <div className="cursor-pointer flex flex-col items-center">
+                <div className="cursor-pointer flex flex-col items-center bg-[#16405c] border py-4">
                   <div className="">
                     <GiTeacher size={30} />
                   </div>
                   <h1 className="font-bold">Lecturer</h1>
-                  <h1>12</h1>
+                  <h1>{lecturer?.length}</h1>
                 </div>
-                <div className="cursor-pointer flex flex-col items-center">
+                <div className="cursor-pointer flex flex-col items-center bg-[#16405c] border py-4">
                   <div className="">
                     <MdAdminPanelSettings size={30} />
                   </div>
                   <h1 className="font-bold">Admin</h1>
-                  <h1>12</h1>
+                  <h1>{users?.length}</h1>
                 </div>
               </div>
               <Outlet />
@@ -141,7 +183,7 @@ const LecturerAdmin = () => {
                 </p>
               </div>
               <Link
-                to="/login"
+                to="/prof-login-portal"
                 className="text-white font-bold bg-blue-600 p-2 rounded-md w-full text-center hover:bg-blue-800"
               >
                 Login
