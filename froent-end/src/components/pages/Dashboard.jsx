@@ -1,20 +1,20 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
-import { BiMaleFemale } from "react-icons/bi";
+import { BsQrCodeScan } from "react-icons/bs";
+
 import { Link, Outlet } from "react-router-dom";
-import { TbCircleArrowDownRight, TbLogout } from "react-icons/tb";
+import { TbLogout } from "react-icons/tb";
 import { MdEdit, MdOutlineDelete } from "react-icons/md";
 import { IoIosCreate } from "react-icons/io";
-import { FaIdCard, FaList, FaUserGraduate } from "react-icons/fa";
+import { FaIdCard, FaList, FaRegEdit, FaUserGraduate } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { FaUserFriends } from "react-icons/fa";
 
 import { IoMailUnread } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { SiObservable } from "react-icons/si";
-import { SiBookstack } from "react-icons/si";
-import { IoSettingsSharp } from "react-icons/io5";
+import { SiBookstack } from "react-icons/si"; 
 import axios from "axios";
 const Dashboard = () => {
   const [auth, setAuth] = useState(false);
@@ -100,7 +100,7 @@ const Dashboard = () => {
               onboard
             </h1>
             <div
-              className="flex items-center rounded-md admin_btn p-2 bg-[#2d2b42] hover:bg-blue-600"
+              className="flex items-center rounded-md admin_btn p-2 bg-[#f60707] hover:bg-blue-600"
               onClick={handleLogout}
             >
               <TbLogout className="cursor-pointer" size={30} />
@@ -139,7 +139,7 @@ const Dashboard = () => {
               <Link to="modify-attendance">
                 <div className="functions">
                   <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
-                    <TbCircleArrowDownRight size={30} />
+                    <FaRegEdit size={30} />
                     <p className="ml-4">Modify Attendance</p>{" "}
                   </div>
                 </div>
@@ -153,7 +153,7 @@ const Dashboard = () => {
                   </div>
                 </div>
               </Link>
-              {/* Create Student */}
+              {/* Create New Student */}
               <Link to="create-new-student">
                 <div className="functions">
                   <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
@@ -162,7 +162,16 @@ const Dashboard = () => {
                   </div>
                 </div>
               </Link>
-              {/* Create Student */}
+              {/* scan Student */}
+              <Link to="scan-student">
+                <div className="functions">
+                  <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
+                    <BsQrCodeScan size={30} />
+                    <p className="ml-4">Scan Student</p>{" "}
+                  </div>
+                </div>
+              </Link>
+              {/* Register  Student in a course */}
               <Link to="register-in-course">
                 <div className="functions">
                   <div className="p-2 bg-[#2D2B42]  m-4 text-white rounded cursor-pointer admin_hover flex items-center">
@@ -200,12 +209,12 @@ const Dashboard = () => {
                 </div>
               </Link>
               {/* Settings */}
-              <Link to="students">
+              {/* <Link to="students">
                 <div className="p-2 admin_hover bg-[#2d2b42] m-4 text-white rounded cursor-pointer flex items-center">
                   <IoSettingsSharp size={30} />
                   <p className="ml-4"> Settings</p>
                 </div>
-              </Link>
+              </Link> */}
               <Link to="users">
                 <div className="p-2 admin_hover bg-[#2d2b42] m-4 text-white rounded cursor-pointer flex items-center">
                   {/* <IoSettingsSharp size={30} /> */}

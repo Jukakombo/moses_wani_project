@@ -17,6 +17,7 @@ import loginUser from "./routers/loginUser.js";
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static("public"));
 app.use(
   cors({
     origin: ["http://localhost:5173"],

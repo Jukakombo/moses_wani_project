@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./components/pages/Index";
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
@@ -22,29 +22,23 @@ import SMSStudentParents from "./components/dashboard/SMSStudentParents";
 import ModifyAttendance from "./components/dashboard/ModifyAttendance";
 import CreateStudents from "./components/dashboard/CreateStudents";
 import Tracking from "./components/dashboard/Tracking";
-import CourseRegister from "./components/dashboard/CourseRegister";
-import Professor from "./components/pages/Professor";
+import CourseRegister from "./components/dashboard/CourseRegister"; 
 import Users from "./components/dashboard/Users";
 import LecturerAdmin from "./components/pages/LecturerAdmin";
 import LecturerRegister from "./components/LecturersAdmin/LecturerRegister";
 import LecturerLogin from "./components/LecturersAdmin/LecturerLogin";
+import ScanStudent from "./components/dashboard/ScanStudent";
 const App = () => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const dispatch = useDispatch(); 
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch]);
+ 
 
-  const ProtectedRoute = ({ children }) => {
-    if (!user) {
-      return <Navigate to="/login" />;
-    }
-    return children;
-  };
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -89,6 +83,7 @@ const App = () => {
               <Route path="take-attendance" element={<TakeAttendance />} />
               <Route path="register-in-course" element={<CourseRegister />} />
               <Route path="create-new-student" element={<CreateStudents />} />
+              <Route path="scan-student" element={<ScanStudent />} />
               <Route path="creact-tracking" element={<Tracking />} />
               <Route path="users" element={<Users />} />
               <Route
