@@ -49,7 +49,7 @@ function Contact() {
       <div className="w-10/12 m-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
           <div className="">
-            <img src="/contact.svg" alt="contact" />
+            <img src="/contact.png" alt="contact" />
           </div>
           <div className="">
             <form onSubmit={handleSubmit}>

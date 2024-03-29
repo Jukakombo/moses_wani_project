@@ -42,8 +42,8 @@ const LecturerLogin = () => {
     <>
       <Header />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 w-10/12 m-auto ">
-        <img src="/login.svg" alt="login" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 w-10/12 m-auto ">
+        <img src="/salva.jpg" alt="login" />
         <form
           onSubmit={handleSubmit}
           className="bg-gray-300 py-4 px-4 rounded-md "

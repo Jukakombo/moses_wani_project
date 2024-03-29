@@ -34,7 +34,7 @@ const Home = () => {
       </div>
       <div className=" m-auto">
         <img
-          src="/qrcode.gif"
+          src="/home.jpg"
           alt="img"
           className="rounded-xl   border-[#6D214F] p-2 border-4"
         />

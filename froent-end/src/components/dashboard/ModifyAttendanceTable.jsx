@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-import axios from "axios";
+/* eslint-disable react/prop-types */ 
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa"; 
 import UpdateAttendance from "./UpdateAttendance";
 
-const ModifyAttendanceTable = ({ attendances }) => {
-  const navigate = useNavigate();
+const ModifyAttendanceTable = ({ attendances }) => { 
   //   const location = useLocation();
   //   const userId = location.pathname.split("/")[2];
   const [query, setQuery] = useState("");

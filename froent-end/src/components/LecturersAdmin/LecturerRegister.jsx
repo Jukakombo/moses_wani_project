@@ -35,9 +35,12 @@ const LecturerRegister = () => {
   return (
     <>
       <Header />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 w-10/12 m-auto">
-        <img src="/signup.svg" alt="login" />
-        <form onSubmit={handleSubmit} className="bg-gray-300 py-4 px-4 rounded-md  ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 w-10/12 m-auto">
+        <img src="/logo_juba.png" alt="login" className="" />
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-300 py-4 px-4 rounded-md  "
+        >
           <div className="flex flex-col border p-2 rounded">
             <label htmlFor="name" className="mb-2 font-bold">
               Name
@@ -96,7 +99,7 @@ const LecturerRegister = () => {
           <div className="flex items-center ">
             <p>{"Don't"} have an account?</p>
             <Link className="text-blue-600 ml-2" to="/prof-login-portal">
-            Login
+              Login
             </Link>
           </div>
         </form>

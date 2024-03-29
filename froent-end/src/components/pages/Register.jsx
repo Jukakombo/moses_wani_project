@@ -48,7 +48,7 @@ function Register() {
       <div className="w-10/12 m-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
           <div className="">
-            <img src="/form.svg" alt="form" />
+            <img src="/admin.jpg" alt="form" />
           </div>
           <form onSubmit={handleSubmit}>
             <h1 className="text-white font-bold uppercase text-xl">

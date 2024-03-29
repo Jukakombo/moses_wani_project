@@ -26,30 +26,12 @@ const CourseRegister = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("RegNo", courses.RegNo);
-      formData.append("FirstName", courses.FirstName);
-      formData.append("LastName", courses.LastName);
-      formData.append("Course1", courses.Course1);
-      formData.append("Course2", courses.Course2);
-      formData.append("Course3", courses.Course3);
-      formData.append("Course4", courses.Course4);
-      formData.append("Course5", courses.Course5);
-      formData.append("Course6", courses.Course6);
-      formData.append("Course7", courses.Course7);
-      formData.append("Course8", courses.Course8);
-      formData.append("Course9", courses.Course9);
-      formData.append("Course10", courses.Course10);
       await axios
-        .post("http://localhost:9000/courses", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post("http://localhost:9000/courses", courses)
         .then((response) => {
           console.log(response);
-          setSuccess(true);
           setTimeout(() => {
+            setSuccess(true);
             setTimeout(() => {
               setSuccess(false);
               clear();
@@ -103,7 +85,7 @@ const CourseRegister = () => {
             <input
               type="text"
               name="RegNo"
-              placeholder="RegNoe Code"
+              placeholder="RegNo Code"
               onChange={handleChange}
               value={courses.RegNo}
               className="p-3 rounded-md  outline-blue-600"
