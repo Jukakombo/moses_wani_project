@@ -14,10 +14,12 @@ import lecturerSignUp from "./routers/LecturerSignUp.js";
 import mysql from "mysql";
 import getUserRouter from "./routers/getUser.js";
 import loginUser from "./routers/loginUser.js";
+import studentIdCards from "./routers/studentIdCards.js";
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static("public"));
+
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -50,6 +52,7 @@ app.use("/attendances", attendanceRouter);
 app.use("/login", lecturerLoginRouter);
 app.use("/signup", lecturerSignUp);
 app.use("/login-user", loginUser);
+app.use("/students-id-cards", studentIdCards);
 
 app.listen(9000, () => {
   console.log("conntected 🚀 to database http://localhost:9000");

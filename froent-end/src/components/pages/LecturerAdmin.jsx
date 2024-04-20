@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { MdAdminPanelSettings } from "react-icons/md";
-import { BiMaleFemale } from "react-icons/bi";
+import { MdAdminPanelSettings } from "react-icons/md"; 
 import { Link, Outlet } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { MdEdit } from "react-icons/md";
@@ -57,7 +56,7 @@ const LecturerAdmin = () => {
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
-    axios.get("http://localhost:9000").then((res) => {
+    axios.get("http://localhost:4000/users/signIn").then((res) => {
       if (res.data.Status === "success") {
         setAuth(true);
         setName(res.data.name);
