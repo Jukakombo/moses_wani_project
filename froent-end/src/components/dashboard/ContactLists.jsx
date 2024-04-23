@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { IoDocument } from "react-icons/io5";
 import { MdOutlineDocumentScanner } from "react-icons/md";
 import { IoTime } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
-import { deleteNews } from "../../actions/news";
-
+import axios from "axios";
+// import moment from "moment";
 const ContactLists = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.news);
+  const [contacts, setContacts] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:9000/contacts");
+      if (!response.ok) {
+        throw new Error("Failed to fetch contacts");
+      }
+      const data = await response.json();
+      setContacts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // delete message function
+  const deleteMessage = async (id) => {
+    try {
+      await axios.delete(`http://localhost:9000/contacts/${id}`);
+      setContacts(contacts.filter((contac) => contac.id !== id));
+      // alert("Contact deleted successfully!");
+    } catch (error) {
+      console.error(`Error deleting message with ID ${id}:`, error);
+    }
+  };
+
   return (
     <div>
       {contacts
@@ -31,10 +56,11 @@ const ContactLists = () => {
               <div className="flex items-center">
                 <IoTime size={30} />
 
-                <span className="mx-4">
+                {/* <span className="mx-4">
                   {x.createdAt.toLocaleString().slice(0, 10)}
                 </span>
-                {moment(x.createdAt).fromNow()}
+                {moment(x.createdAt).fromNow()} */}
+                
               </div>
             </div>
             <div className="my-8 ">
@@ -63,7 +89,7 @@ const ContactLists = () => {
                 {x.message}
               </p>
               <button
-                onClick={() => dispatch(deleteNews(x._id))}
+                onClick={() => deleteMessage(x.id)}
                 className="bg-red-600 w-full rounded-md p-2"
               >
                 Delete Message

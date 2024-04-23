@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { jsPDF } from "jspdf";
-import QRCode from "qrcode";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import html2canvas from "html2canvas";
+import QRCode from "qrcode";
 
 const IDCardWithQRCode = () => {
   const [qrcode, setQrcode] = useState("");
@@ -32,36 +32,29 @@ const IDCardWithQRCode = () => {
       console.log(`Student with ID ${id} not found.`);
     }
   }, [id, cards]);
-  const createPDF = async () => {
+
+  const createImage = async () => {
     if (selectedStudent && qrcode) {
-      const pdfWidth = 420;
-      const pdfHeight = 263;
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "px",
-        format: [pdfWidth, pdfHeight],
-      });
-
-      // Set text color to black
-      pdf.setTextColor("#000");
-
-      // Get the HTML element containing the ID card
       const data = document.querySelector("#pdf");
 
-      // Add image and QR code
-      const qrImage = new Image();
-      qrImage.src = qrcode;
-      pdf.addImage(qrImage, "JPEG", pdfWidth - 100, pdfHeight - 100, 80, 80);
+      // Define the dimensions for the canvas
+      const canvasWidth = 420;
+      const canvasHeight = 263;
 
-      // Convert HTML to PDF
-      pdf.html(data).then(() => {
-        // Save PDF with student name as filename
-        pdf.save(selectedStudent.studentName);
-      });
+      html2canvas(data, { width: canvasWidth, height: canvasHeight }).then(
+        (canvas) => {
+          // Convert canvas to JPEG image
+          const imageData = canvas.toDataURL("image/jpeg");
+
+          // Create a link element to download the image
+          const link = document.createElement("a");
+          link.download = `${selectedStudent.studentName}.jpeg`;
+          link.href = imageData;
+          link.click();
+        }
+      );
     }
   };
-
- 
 
   const generateQRCode = async () => {
     if (selectedStudent) {
@@ -147,14 +140,16 @@ const IDCardWithQRCode = () => {
             </div>
           </div>
         </div>
+        {/* end of id card  */}
       </div>
+
       <div className="flex items-center my-2">
         <button
-          onClick={createPDF}
+          onClick={createImage}
           className="bg-blue-600 p-2 rounded-md w-[200px] mr-2 text-white"
           disabled={!qrcode} // Disable button if QR code is not generated yet
         >
-          Download ID Card
+          Download ID Card Image
         </button>
       </div>
     </div>

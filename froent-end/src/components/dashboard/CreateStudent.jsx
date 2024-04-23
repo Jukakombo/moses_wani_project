@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import UpdateIdCard from "./UpdateIdCard";
-
+import axios from "axios"; 
 function CreateStudent() {
   const [success, setSuccess] = useState(false);
 
@@ -211,14 +209,13 @@ function CreateStudent() {
             Create Student ID Card
           </button>
         </form>
+   
         {success && (
           <div className="bg-green-600 p-2 rounded text-white text-xl">
             Student ID Card successfully created!
           </div>
         )}
-        <div className="bg-white p-2">
-          <UpdateIdCard />
-        </div>
+        <div className="bg-white p-2">{/* <UpdateIdCard /> */}</div>
       </div>
     </div>
   );

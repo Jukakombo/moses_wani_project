@@ -12,32 +12,23 @@ import ViewIdCard from "./components/dashboard/ViewIdCard";
 import StudentCards from "./components/dashboard/StudentCards";
 import DeleteStudent from "./components/dashboard/DeleteStudent";
 import CreateStudent from "./components/dashboard/CreateStudent";
-import ContactLists from "./components/dashboard/ContactLists";
-import { useDispatch } from "react-redux";
-import { getContacts } from "./actions/contacts";
-import { getNews } from "./actions/news";
+import ContactLists from "./components/dashboard/ContactLists"; 
 import TakeAttendance from "./components/dashboard/TakeAttendance";
 import ViewAttendance from "./components/dashboard/ViewAttendance";
 import SMSStudentParents from "./components/dashboard/SMSStudentParents";
 import ModifyAttendance from "./components/dashboard/ModifyAttendance";
 import CreateStudents from "./components/dashboard/CreateStudents";
 import Tracking from "./components/dashboard/Tracking";
-import CourseRegister from "./components/dashboard/CourseRegister"; 
+import CourseRegister from "./components/dashboard/CourseRegister";
 import Users from "./components/dashboard/Users";
 import LecturerAdmin from "./components/pages/LecturerAdmin";
 import LecturerRegister from "./components/LecturersAdmin/LecturerRegister";
 import LecturerLogin from "./components/LecturersAdmin/LecturerLogin";
-import ScanStudent from "./components/dashboard/ScanStudent";
+import ScanStudent from "./components/dashboard/ScanStudent"; 
+import UpdateICard from "./components/dashboard/UpdateICard";
 const App = () => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch(); 
-  useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
-  useEffect(() => {
-    dispatch(getNews());
-  }, [dispatch]);
- 
+  
 
   useEffect(() => {
     setLoading(true);
@@ -58,6 +49,11 @@ const App = () => {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/prof-portal" element={<LecturerRegister />} />
+            <Route
+              exact
+              path="/admin-dashboard/create-student-id-card/:id"
+              element={<UpdateICard />}
+            />
             <Route
               exact
               path="/prof-login-portal"

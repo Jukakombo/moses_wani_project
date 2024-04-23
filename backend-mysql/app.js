@@ -15,6 +15,7 @@ import mysql from "mysql";
 import getUserRouter from "./routers/getUser.js";
 import loginUser from "./routers/loginUser.js";
 import studentIdCards from "./routers/studentIdCards.js";
+import contactRouter from "./routers/contacts.js";
 
 app.use(express.json());
 app.use(cookieParser());
@@ -53,6 +54,7 @@ app.use("/login", lecturerLoginRouter);
 app.use("/signup", lecturerSignUp);
 app.use("/login-user", loginUser);
 app.use("/students-id-cards", studentIdCards);
+app.use("/contacts", contactRouter);
 
 app.listen(9000, () => {
   console.log("conntected 🚀 to database http://localhost:9000");

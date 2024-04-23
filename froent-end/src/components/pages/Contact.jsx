@@ -1,38 +1,39 @@
 import React, { useState } from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import { createNews } from "../../actions/news";
-import { useDispatch } from "react-redux";
+import axios from "axios";
 
-const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  subject: "",
-  message: "",
-};
 function Contact() {
-  const dispatch = useDispatch();
   const [success, setSuccess] = useState(false);
-  const [contacts, setContacts] = useState(initialState);
-  const { firstName, lastName, email, subject, message, phone } = contacts;
-  const handleSubmit = (e) => {
+
+  const [contacts, setContacts] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(createNews(contacts));
-    setTimeout(() => {
+    try {
+      // Send the form data in the POST request
+
+      await axios.post("http://localhost:9000/contacts", contacts);
+
       setSuccess(true);
+
       setTimeout(() => {
         setSuccess(false);
       }, 5000);
-    }, 3000);
-    clear();
+      clear();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleChange = (e) => {
-    setContacts({ ...contacts, [e.target.name]: e.target.value });
-  };
   const clear = () => {
     setContacts({
       firstName: "",
@@ -43,6 +44,15 @@ function Contact() {
       message: "",
     });
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContacts((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div>
       <Header />
@@ -60,9 +70,9 @@ function Contact() {
                 <input
                   className="shadow appearance-none border rounded w-full p-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
-                  placeholder="Name"
+                  placeholder="First Name"
                   name="firstName"
-                  value={firstName}
+                  value={contacts.firstName}
                   required
                   onChange={handleChange}
                 />
@@ -76,7 +86,7 @@ function Contact() {
                   type="text"
                   placeholder="Name"
                   name="lastName"
-                  value={lastName}
+                  value={contacts.lastName}
                   required
                   onChange={handleChange}
                 />
@@ -89,7 +99,7 @@ function Contact() {
                   className="shadow appearance-none border rounded w-full p-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="email"
                   placeholder="Email"
-                  value={email}
+                  value={contacts.email}
                   name="email"
                   required
                   onChange={handleChange}
@@ -104,7 +114,7 @@ function Contact() {
                   id="name"
                   type="text"
                   placeholder="Phone Number"
-                  value={phone}
+                  value={contacts.phone}
                   name="phone"
                   required
                   onChange={handleChange}
@@ -119,7 +129,7 @@ function Contact() {
                   id="name"
                   type="text"
                   placeholder="Subject"
-                  value={subject}
+                  value={contacts.subject}
                   name="subject"
                   required
                   onChange={handleChange}
@@ -135,7 +145,7 @@ function Contact() {
                   type="text"
                   placeholder="Message"
                   rows={5}
-                  value={message}
+                  value={contacts.message}
                   name="message"
                   required
                   onChange={handleChange}
@@ -143,7 +153,7 @@ function Contact() {
               </div>
               {success && (
                 <div className="navigation p-2 mb-4">
-                  <h1 className="text-2xl text-white text-center font-bold ">
+                  <h1 className="text-2xl text-white text-center font-bold bg-green-600 rounded-md p-2">
                     Your message has been successfully sent! 🎉
                   </h1>
                 </div>

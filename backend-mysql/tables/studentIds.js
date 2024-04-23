@@ -58,7 +58,6 @@ export const createStudentIdCard = async (req, res) => {
       req.body.indexNumber,
       req.body.nationality,
       req.body.validTill,
-      // req.body.profilePhoto,
       req.file.filename,
       req.body.nationalNumber,
     ];
@@ -70,33 +69,85 @@ export const createStudentIdCard = async (req, res) => {
     res.json(error);
   }
 };
-
-// Function to update a student ID card
 export const updateStudentIdCard = async (req, res) => {
-  const studentId = req.params.id;
+  try {
+    const studentId = req.params.id;
 
-  let query =
-    "UPDATE studentids SET `studentName`=?, `schoolCenter`=?, `classYear`=?, `indexNumber`=?, `nationality`=?, `validTill`=?, `profilePhoto`=?, `nationalNumber`=? WHERE id=?";
-
-  const values = [
-    req.body.studentName,
-    req.body.schoolCenter,
-    req.body.classYear,
-    req.body.indexNumber,
-    req.body.nationality,
-    req.body.validTill,
-    req.body.nationalNumber,
-  ];
-
-  db.query(query, values, (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ error: `Failed to update student ID card: ${err.message}` });
+    // Check if required fields are present in the request body
+    const requiredFields = [
+      'studentName',
+      'schoolCenter',
+      'classYear',
+      'indexNumber',
+      'nationality',
+      'validTill',
+      'nationalNumber',
+    ];
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        return res.status(400).json({
+          error: `${field} is required for updating student ID card`,
+        });
+      }
     }
-    res.json({ message: "Student ID card updated successfully" });
-  });
+
+    // SQL query to update the student ID card
+    const query =
+      "UPDATE studentids SET `studentName`=?, `schoolCenter`=?, `classYear`=?, `indexNumber`=?, `nationality`=?, `validTill`=?, `nationalNumber`=? " +
+      (req.file ? ", `fileName`=? " : "") +
+      "WHERE id =?";
+
+    // Extract values from the request body
+    const {
+      studentName,
+      schoolCenter,
+      classYear,
+      indexNumber,
+      nationality,
+      validTill,
+      nationalNumber,
+    } = req.body;
+
+    // Values to be updated
+    let values = [
+      studentName,
+      schoolCenter,
+      classYear,
+      indexNumber,
+      nationality,
+      validTill,
+      nationalNumber,
+    ];
+
+    // Check if a file was uploaded with the update request
+    if (req.file) {
+      values.push(req.file.filename);
+    }
+
+    // Push studentId at the end
+    values.push(studentId);
+
+    // Execute the SQL query
+    db.query(query, values, (err, data) => {
+      if (err) {
+        return res.status(500).json({
+          error: `Failed to update student ID card: ${err.message}`,
+        });
+      }
+      if (data.affectedRows === 0) {
+        return res.status(404).json({
+          error: `Student ID card with ID ${studentId} not found`,
+        });
+      }
+      res.json({ message: "Student ID card updated successfully" });
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: `Internal server error: ${error.message}`,
+    });
+  }
 };
+
 
 // Function to delete a student ID card
 export const deleteStudentIdCard = async (req, res) => {
